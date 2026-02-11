@@ -15,6 +15,7 @@ export const AppProvider = ({ children }) => {
   const [groups, setGroups] = useState(() => loadState('pelada_groups', INITIAL_GROUPS));
   const [games, setGames] = useState(() => loadState('pelada_games', INITIAL_GAMES));
   const [currentUser, setCurrentUser] = useState(() => loadState('pelada_currentUser', null));
+  const [loading, setLoading] = useState(false);
   
   // Salvar no localStorage sempre que mudar
   useEffect(() => localStorage.setItem('pelada_users', JSON.stringify(users)), [users]);
@@ -150,7 +151,8 @@ export const AppProvider = ({ children }) => {
       users, groups, games, currentUser,
       currentRoute, routeParams, navigate,
       login, register, logout,
-      addGroup, updateGroup, updateGame, updateUser, addGuestUser, finalizeGame
+      addGroup, updateGroup, updateGame, updateUser, addGuestUser, finalizeGame,
+      loading, setLoading
     }}>
       {children}
     </AppContext.Provider>

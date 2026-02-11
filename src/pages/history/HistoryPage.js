@@ -11,7 +11,13 @@ const HistoryPage = () => {
   return (
     <>
       <Header showBack onBack={() => navigate('home')} />
-      <div className="p-6 flex-1 overflow-y-auto">
+
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+  {/* O ponto de interrogação (?) antes do ponto garante que se games for nulo, o app não trave */}
+  {games?.length > 0 ? (
+    games.map((game) => (
+      <div key={game.id} className="card-base p-4">
+        <div className="p-6 flex-1 overflow-y-auto">
         <h2 className="text-xl font-bold text-slate-800 mb-1">Histórico</h2><p className="text-sm text-slate-500 mb-6">{group.name}</p>
         <div className="space-y-4">
           {groupGames.length === 0 ? (
@@ -40,6 +46,18 @@ const HistoryPage = () => {
           )}
         </div>
       </div>
+        <p className="font-bold text-slate-800">Partida em {game.date}</p>
+      </div>
+    ))
+  ) : (
+    // Caso não existam jogos, mostra um aviso amigável
+    <div className="flex flex-col items-center justify-center h-full text-slate-400">
+      <p>Nenhuma partida encontrada no histórico.</p>
+    </div>
+  )}
+</div>
+
+      
     </>
   );
 };
